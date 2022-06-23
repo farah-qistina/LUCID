@@ -93,7 +93,7 @@ class Player:
 
   def sp(self):
     if self.score <= 0:
-      print("\nyour lucidity score has plunged \nyou are zzcurrently undergoing sleep paralysis\n")
+      print("\nyour lucidity score has plunged \nyou are currently undergoing sleep paralysis\n")
       if self.experience == True:
         print("fortunately, your sleep is uninterrupted by reason of prior experience")
         self.score = 0
@@ -120,7 +120,6 @@ class Player:
     return True
 
   def say(self, dreamer):
-    print("\ninput \"end\" to end the dialogue")
     temp = input("\n" + self.name + " says: ")
     while True:
       temp = input("\n" + dreamer.name + " says: ")
@@ -143,6 +142,7 @@ class Player:
       enter()
       q = check(input("\nwould you like to answer? \n(y, n, stats) \n"), dreamer)
       if q == "y": 
+        print("\ntype \"end\" to end the dialogue")
         dreamer.say(self)
 
     if dream == "d2":
@@ -155,6 +155,7 @@ class Player:
       enter()
       q = check(input("\nwould you like to answer? \n(y, n, stats) \n"), dreamer)
       if q == "y": 
+        print("\ntype \"end\" to end the dialogue")
         dreamer.say(self)
 
     if dream == "d3":
@@ -163,9 +164,11 @@ class Player:
       score(self)
       score(dreamer)
       print("\nYou fly to Paris with {b} on a private plane, pretending to be like Jackie Onassis and wearing big glasses because you're both overdramatic and the world is ending. \n{a} +30 lp\n{b} +30 lp".format(a = self.name, b = dreamer.name))
-      q = check(input("\nwould you like to start a dialogue? \n(y, n, stats) \n"), self)
+      q = check(input("\nwould you like to start a conversation? \n(y, n, stats) \n"), self)
       if q == "y": 
-        self.say(dreamer)
+        print("\ntype \"end\" to end the dialogue")
+        input("\n" + dreamer.name + " says: ")
+        self.say(self)
 
     self.counter += 1
     dreamer.counter += 1
@@ -200,7 +203,7 @@ class Player:
 
   def wake(self):
     self.awake = True
-    msg = ("you wake up from your slumber")
+    msg = ("you wake up ")
     if self.log == True: msg += " and begin logging your dreams"
     time = now + self.minutes
     print("\n" + self.name + dt.strftime(time, ("\n\n%H:%M")) + "\n\n" + msg + "\n\nlucid dreams:", self.counter)
@@ -240,7 +243,7 @@ def new(name):
 def technique(d):
     q = check(input("\nwould you like to opt for a technique? \n(y, n, stats) \n"), d)
     if q == "y": 
-      q = check(input("\ntechniques: \n1: " + repr(A) + "\n" + "2: " + repr(B) + "\nchoose an option \nA or B\n"), None, None, "A", "B")
+      q = check(input("\n\ntechniques: \n\nA: " + repr(A) + "\n" + "B: " + repr(B) + "\nchoose an option \nA or B\n"), None, None, "A", "B")
       if q == "A": d.perf_tech(A)
       else: d.perf_tech(B)
 
@@ -252,6 +255,7 @@ while name.strip() == "":
 if name.strip() == "qis": dreamer1 = qis()
 else: dreamer1 = new(name)
 print(dreamer1)
+enter()
 name = input("\nplayer 2 \nwhat is your dreamer name? \n")
 while name.strip() == dreamer1.name or name.strip() == "": 
   if name.strip() == "":
@@ -261,6 +265,7 @@ while name.strip() == dreamer1.name or name.strip() == "":
 if name.strip() == "qis": dreamer2 = qis()
 else: dreamer2 = new(name)
 print(dreamer2)
+enter()
 
 def session1(d1, d2): 
   if d1.awake is False:
@@ -279,8 +284,9 @@ def session1(d1, d2):
 
 def session2(d1, d2):
   if d1.awake is False:
-    if d1.lucid is True:
-      print(d1.name + "\n")
+    if d1.lucid is True and d1.score != 100:
+      print(d1.name)
+      enter()
       technique(d1)
     if d1.dream(d2):
       d1.sp()
