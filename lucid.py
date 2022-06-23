@@ -246,13 +246,18 @@ def technique(d):
 
 print("\n" + dt.strftime(now, ("%H:%M")), "\n\n2 dreamers fall asleep")
 
-name = input("\ndreamer 1 \nwhat do they call you? \n")
+name = input("\nplayer 1 \nwhat is your dreamer name? \n")
+while name.strip() == "": 
+  name = input("\nthe name can't be blank\n")
 if name.strip() == "qis": dreamer1 = qis()
 else: dreamer1 = new(name)
 print(dreamer1)
-name = input("\ndreamer 2 \nwhat do they call you? \n")
-while name == dreamer1.name: 
-  name = input("\ninvalid answer \n")
+name = input("\nplayer 2 \nwhat is your dreamer name? \n")
+while name.strip() == dreamer1.name or name.strip() == "": 
+  if name.strip() == "":
+    name = input("\nthe name can't be blank\n")
+  elif name.strip() == dreamer1.name:
+    name = input("\n1 player can't dream for 2\n")
 if name.strip() == "qis": dreamer2 = qis()
 else: dreamer2 = new(name)
 print(dreamer2)
