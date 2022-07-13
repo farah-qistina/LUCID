@@ -4,7 +4,7 @@ from datetime import timedelta as td
 import pytz
 from rich import print
 
-print("""[bold bright_magenta]
+print("""[bold dark_magenta]
 
  _                 _______ _________ ______  
 ( \      |\     /|(  ____ \\\__   __/(  __  \ 
@@ -14,11 +14,11 @@ print("""[bold bright_magenta]
 | |      | |   | || |         | |   | |   ) |
 | (____/\| (___) || (____/\___) (___| (__/  )
 (_______/(_______)(_______/\_______/(______/ 
-[/bold bright_magenta]                                              
+[/bold dark_magenta]                                              
 -----------------------------------------------
 Welcome to LUCID!
 -----------------------------------------------
-by qis
+[bold dark_magenta]by qis[/bold dark_magenta] 
 """)
 
 now = dt.now(pytz.timezone('Asia/Kuala_Lumpur'))
