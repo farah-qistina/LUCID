@@ -2,8 +2,9 @@ import random
 from datetime import datetime as dt
 from datetime import timedelta as td
 import pytz
+from rich import print
 
-print("""
+print("""[bold bright_magenta]
 
  _                 _______ _________ ______  
 ( \      |\     /|(  ____ \\\__   __/(  __  \ 
@@ -13,7 +14,7 @@ print("""
 | |      | |   | || |         | |   | |   ) |
 | (____/\| (___) || (____/\___) (___| (__/  )
 (_______/(_______)(_______/\_______/(______/ 
-                                              
+[/bold bright_magenta]                                              
 -----------------------------------------------
 Welcome to LUCID!
 -----------------------------------------------
@@ -73,7 +74,7 @@ class Technique:
 class Player:
   def __init__(self, name):
     self.name = name
-    self.minutes = td(hours = 1, minutes = 47)
+    self.minutes = td(hours = 0, minutes = 0)
     self.score = 0
     self.counter = 0
     self.lucid = False
@@ -81,8 +82,11 @@ class Player:
     self.log = False
     self.awake = False
   def __repr__(self):
+    return "\nname: {} \nlucidity score: {}".format(self.name, self.score)
+
+  def time(self):
     time = dt(1970, 1, 1) + self.minutes
-    return "\nname: {} \ntime slept: {} \nlucidity score: {}".format(self.name, time.strftime("%H hours and %M minutes"), self.score)
+    return time.strftime("%H hours and %M minutes")
 
   def perf_tech(self, tech):
     if tech.success() is True:
@@ -101,7 +105,8 @@ class Player:
       else: 
         self.awake = True
         print(dt.strftime(now + self.minutes, ("%H:%M\n")))
-        print("your sleep paralysis demon assaults you. \nyou wake in fright, too petrified to return to sleep", "\n\nlucid dreams:", self.counter)
+        print("your sleep paralysis demon assaults you. \nyou wake in fright, too petrified to return to sleep")
+        print("\n" + "time slept:", self.time() + "\n\nlucid dreams:", self.counter)
 
   def success(self):
     if random.choice(range(1, 101))<=self.score:
@@ -115,7 +120,7 @@ class Player:
       self.counter += 1
     self.minutes += td(minutes = 15)
     self.score += 10
-    print("\n" + dream.descrip + "\n\n+10 lp")
+    print("\n" + dream.descrip + "\n\n+10 lp\n")
     score(self)
     return True
 
@@ -137,7 +142,7 @@ class Player:
       dreamer.score += 20
       score(self)
       score(dreamer)
-      print("\nYou're learning acrobatic gymnastics with {b}. They repeatedly shapeshift into a little girl and back while performing twists in the air with you. You achieve lucidity when you both land and notice a sense of clarity in {b}'s eyes. \n{a} +20 lp\n{b} +20 lp \nTo your surprise, they ask, \"are you dreaming too?\"".format(a = self.name, b = dreamer.name))
+      print("\nYou're learning acrobatic gymnastics with {b}. They repeatedly shapeshift into a little girl and back while performing twists in the air with you. You achieve lucidity when you both land and notice a sense of clarity in {b}'s eyes. \n{a} +20 lp\n\n{b} +20 lp \nTo your surprise, they ask, \"are you dreaming too?\"".format(a = self.name, b = dreamer.name))
       print("\n\n" + dreamer.name)
       enter()
       q = check(input("\nwould you like to answer? \n(y, n, stats) \n"), dreamer)
@@ -150,7 +155,7 @@ class Player:
       dreamer.score += 10
       score(self)
       score(dreamer)
-      print("\nYou're driving {b}'s car to Dallas, away from adolescence. You stop at a 7-11 and the both of you start planning your weekend together. \n{a} +10 lp\n{b} +10 lp \nAfter a while, you ask, \"How is it living with your parents?\"".format(a = self.name, b = dreamer.name))
+      print("\nYou're driving {b}'s car to Dallas, away from adolescence. You stop at a 7-11 and the both of you start planning your weekend together. \n{a} +10 lp\n{b} +10 lp \n\nAfter a while, you ask, \"How is it living with your parents?\"".format(a = self.name, b = dreamer.name))
       print("\n\n" + dreamer.name)
       enter()
       q = check(input("\nwould you like to answer? \n(y, n, stats) \n"), dreamer)
@@ -204,11 +209,10 @@ class Player:
   def wake(self):
     self.awake = True
     msg = ("you wake up ")
-    if self.log == True: msg += " and begin logging your dreams"
-    time = now + self.minutes
-    print("\n" + self.name + dt.strftime(time, ("\n\n%H:%M")) + "\n\n" + msg + "\n\nlucid dreams:", self.counter)
+    if self.log == True: msg += "and begin logging your dreams"
     dt.strftime(now + self.minutes, ("%H:%M"))
-    print(self)
+    time = now + self.minutes
+    print("\n" + self.name + dt.strftime(time, ("\n\n%H:%M")) + "\n\n" + msg + "\n\ntime slept:", self.time() + "\n\nlucid dreams:", self.counter, "\n")
 
 A = Technique("climbing up a rope", 25, 50)
 B = Technique("riding on a train through a tunnel", 30, 40)
@@ -294,6 +298,8 @@ def session2(d1, d2):
     enter()
 
 print(dt.strftime(now + td(hours = 1, minutes = 47), ("\n%H:%M")))
+dreamer1.minutes += td(hours = 1, minutes = 47)
+dreamer2.minutes += td(hours = 1, minutes = 47)
 enter()
 
 if td(hours = 1, minutes = 47) == dreamer1.minutes:
