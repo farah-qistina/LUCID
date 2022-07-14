@@ -18,7 +18,7 @@ print("""[bold dark_magenta]
 -----------------------------------------------
 Welcome to LUCID!
 -----------------------------------------------
-[bold dark_magenta]by qis[/bold dark_magenta] 
+by qis
 """)
 
 now = dt.now(pytz.timezone('Asia/Kuala_Lumpur'))
