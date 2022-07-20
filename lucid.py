@@ -1,7 +1,6 @@
 import random
 from datetime import datetime as dt
 from datetime import timedelta as td
-import pytz
 from rich import print
 
 print("""
@@ -25,7 +24,7 @@ print("""
 
 """)
 
-now = dt.now(pytz.timezone('Asia/Kuala_Lumpur'))
+now = dt.now()
 
 def score(d):
   if d.score > 100:
