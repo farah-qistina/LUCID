@@ -86,7 +86,7 @@ class Player:
     self.log = False
     self.awake = False
   def __repr__(self):
-    return "\nname: {} \nlucidity score: {}".format(self.name, self.score)
+    return "\nname: {} \nlucidity points: {}".format(self.name, self.score)
 
   def time(self):
     time = dt(1970, 1, 1) + self.minutes
@@ -136,7 +136,7 @@ class Player:
       temp = input("\n" + self.name + " says: ")
       if temp == "end": break
     self.score += 30
-    self.score += 30
+    dreamer.score += 30
     print("\n{a} +30 lp \n{b} +30 lp".format(a = self.name, b = dreamer.name))
     enter()
 
