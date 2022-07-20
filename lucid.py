@@ -2,6 +2,7 @@ import random
 from datetime import datetime as dt
 from datetime import timedelta as td
 from rich import print
+import requests
 
 print("""
 
