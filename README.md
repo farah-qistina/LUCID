@@ -4,7 +4,7 @@
 
 A text-based game about lucid dreams
 
-Read the [**blog post**](https://dev.to/farahqistina/lucid-1774) to learn more about the game, such as hidden features and what lucid dreams are!
+Read the [**blog post**](https://dev.to/farahqistina/lucid-1774) to learn more, such as what lucid dreams are and other things about the game, like bonus features!
 
 ## How to Play
 - Install the Python library 'rich' (optional)
