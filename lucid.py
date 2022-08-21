@@ -1,7 +1,8 @@
 import random
 from datetime import datetime as dt
 from datetime import timedelta as td
-from rich import print
+try: from rich import print
+except ModuleNotFoundError: pass
 import requests
 
 print("""
@@ -55,8 +56,8 @@ a = Dream(-25, "You consciously slip into a dream. \nYou find yourself in a vaca
 b =  Dream(-20, "You've previously filled out a university's application form. By the time you decide to submit it, you discover that the deadline has passed. \nYou blame yourself for such carelessness. (-20 lp)")
 c = Dream(20, "You're being chased by the government. \nYou take an unusual turn that leads to a dead end. You achieve lucidity and call a friend for help. (+20 lp)")
 d = Dream(10, "You're skiing on a piste and notice that something feels off. \nYou try to take control of the dream with minimal success. (+10 lp)")
-e = Dream(45, "You decide to take a drive alone in CHERRYBOMB. \nThe traffic ahead distracts you and you crash into a child. \nYou achieve lucidity while talking to someone outside regarding the car accident and you reverse the scenario. (+45 lp)")
-f = Dream(30, "You are flying in the air and notice that the view is bland. \nYou achieve lucidity and transform it into Riyadh's city skyline at dusk. (+30 lp)")
+e = Dream(45, "You decide to take a drive alone in your brand new car. \nThe traffic ahead distracts you and you crash into a child. \nYou achieve lucidity while talking to someone outside regarding the car accident and you reverse the scenario. (+45 lp)")
+f = Dream(30, "You are flying in the air and notice that the view is bland. \nYou achieve lucidity and transform it into Tokyo's city skyline at dusk. (+30 lp)")
 g = Dream(-50, "You are on a video call with your lover. \nYou walk towards a window and notice them on the other side. The video call ends as they notice you too, \nYou are entranced by their appeal. (-50 lp)")
 h = Dream(-30, "You're looking at your skin on a mirror. You notice that that your acne is getting worse and your pores are opening up despite your best efforts at taking care of your skin. \nThis frustrates you to the point of anger. (-30 lp)")
 dreams = [a, b, c, d, e, f, g, h, "d1", "d2", "d3"]
@@ -85,6 +86,7 @@ class Player:
     self.experience = False
     self.log = False
     self.awake = False
+    
   def __repr__(self):
     return "\nname: {} \nlucidity points: {}".format(self.name, self.score)
 
